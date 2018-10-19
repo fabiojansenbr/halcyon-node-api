@@ -1,0 +1,20 @@
+version: 1.0.{build}
+image: ubuntu
+stack: node 8
+
+build_script:
+- yarn
+- yarn lint
+
+after_build:
+- yarn --production
+- rm -rf .git .vscode .eslintignore .eslintrc .gitignore .prettierrc appveyor.yml README.md
+
+artifacts:
+- path: /
+  name: Halcyon.ExpressApi
+  type: Zip
+  
+deploy:
+- provider: Environment
+  name: halcyon-express-api
