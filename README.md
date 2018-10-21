@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ycwlg6x0yk3qetfc?svg=true)](https://ci.appveyor.com/project/chrispoulter/halcyon-express-api)
 
-A Node.js/Express api project template.
+A Node.js api project template.
 
 [https://halcyon-express-api.chrispoulter.com](https://halcyon-express-api.chrispoulter.com)
 
@@ -11,9 +11,9 @@ A Node.js/Express api project template.
 - Node.js
 [https://nodejs.org](https://nodejs.org)
 - Express
-[https://expressjs.com](https://expressjs.com/)
+[https://expressjs.com](https://expressjs.com)
 - MongoDB
-[https://www.mongodb.com](https://www.mongodb.com/)
+[https://www.mongodb.com](https://www.mongodb.com)
 
 #### Custom Settings
     SECURITY_KEY=Z332RQz9Yjjd1IfRfv4W

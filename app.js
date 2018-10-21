@@ -56,7 +56,8 @@ app.use('/api/user', user);
 app.use('/seed', seed);
 
 const swaggerDoc = yaml.load('./swagger.yml');
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+const options = { customSiteTitle: 'Halcyon Api' };
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc, options));
 app.use('/$', (req, res) => res.redirect('/swagger'));
 
 app.use(notFoundMiddleware);

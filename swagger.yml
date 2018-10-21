@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
     version: v1
     title: Halcyon Api
-    description: A Node.js/Express api project template.
+    description: A Node.js api project template.
 
 securityDefinitions:
     bearer:
