@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const config = require('./config');
 
 module.exports = user => {
-    const expiresIn = 3600;
+    const expiresIn = config.JWT_EXPIRY_MINUTES * 60;
+
     const payload = {
         sub: user.id,
         email: user.emailAddress,
@@ -12,7 +13,7 @@ module.exports = user => {
         role: user.roles && user.roles.join()
     };
 
-    const accessToken = jwt.sign(payload, config.SECURITY_KEY, {
+    const accessToken = jwt.sign(payload, config.JWT_SECURITY_KEY, {
         expiresIn
     });
 

@@ -16,12 +16,13 @@ A Node.js api project template.
 [https://www.mongodb.com](https://www.mongodb.com)
 
 #### Custom Settings
-    SECURITY_KEY=Z332RQz9Yjjd1IfRfv4W
+    JWT_SECURITY_KEY=Z332RQz9Yjjd1IfRfv4W
+    JWT_EXPIRY_MINUTES=60
 
     MONGODB=<MongoDB URI> // default: mongodb://localhost:27017/halcyon
 
-    ADMIN_EMAIL_ADDRESS=<System Administrator Email Address> // default: admin@chrispoulter.com
-    ADMIN_PASSWORD=<System Administrator Password> // default: Testing123 
+    SEED_EMAIL_ADDRESS=<System Administrator Email Address> // default: admin@chrispoulter.com
+    SEED_PASSWORD=<System Administrator Password> // default: Testing123 
 
     EMAIL_HOST=<Smtp Host> // default: localhost
     EMAIL_PORT=<Smtp Port> // default: 25

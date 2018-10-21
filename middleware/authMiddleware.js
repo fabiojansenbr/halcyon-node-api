@@ -13,7 +13,7 @@ module.exports = requiredRoles => async (req, res, next) => {
 
     let payload;
     try {
-        payload = await jwt.verify(token, config.SECURITY_KEY);
+        payload = await jwt.verify(token, config.JWT_SECURITY_KEY);
     } catch (error) {
         console.error('Verify Token Failed', error);
     }
