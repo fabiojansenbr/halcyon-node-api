@@ -2,6 +2,7 @@ const express = require('express');
 const manageController = require('../controllers/manageController');
 const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
+
 const authorize = authMiddleware();
 
 router.get('/', authorize, manageController.getProfile);
