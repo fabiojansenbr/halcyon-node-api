@@ -7,7 +7,7 @@ const email = require('../utils/email');
 const providers = require('../providers');
 const User = require('../models/user');
 
-exports.register = [
+module.exports.register = [
     validationMiddleware([
         validators.emailAddress,
         validators.password,
@@ -49,7 +49,7 @@ exports.register = [
     }
 ];
 
-exports.registerExternal = [
+module.exports.registerExternal = [
     validationMiddleware([
         validators.provider,
         validators.accessToken,
@@ -109,7 +109,7 @@ exports.registerExternal = [
     }
 ];
 
-exports.forgotPassword = [
+module.exports.forgotPassword = [
     validationMiddleware([validators.emailAddress]),
     async (req, res) => {
         const user = await User.findOne({
@@ -135,7 +135,7 @@ exports.forgotPassword = [
     }
 ];
 
-exports.resetPassword = [
+module.exports.resetPassword = [
     validationMiddleware([
         validators.code,
         validators.emailAddress,

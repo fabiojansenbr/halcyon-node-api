@@ -5,7 +5,7 @@ const { querystring } = require('../utils/request');
 const response = require('../utils/response');
 const User = require('../models/user');
 
-exports.getUsers = async (req, res) => {
+module.exports.getUsers = async (req, res) => {
     const size = querystring.getInt(req, 'size', 10);
     const page = querystring.getInt(req, 'page', 1);
     const search = getSearchExpression(req.query.search);
@@ -44,7 +44,7 @@ exports.getUsers = async (req, res) => {
     });
 };
 
-exports.createUser = [
+module.exports.createUser = [
     validationMiddleware([
         validators.emailAddress,
         validators.password,
@@ -78,7 +78,7 @@ exports.createUser = [
     }
 ];
 
-exports.getUser = async (req, res) => {
+module.exports.getUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -99,7 +99,7 @@ exports.getUser = async (req, res) => {
     });
 };
 
-exports.updateUser = [
+module.exports.updateUser = [
     validationMiddleware([
         validators.emailAddress,
         validators.firstName,
@@ -138,7 +138,7 @@ exports.updateUser = [
     }
 ];
 
-exports.lockUser = async (req, res) => {
+module.exports.lockUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -156,7 +156,7 @@ exports.lockUser = async (req, res) => {
     return response.generate(res, 200, ['User successfully locked.']);
 };
 
-exports.unlockUser = async (req, res) => {
+module.exports.unlockUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -168,7 +168,7 @@ exports.unlockUser = async (req, res) => {
     return response.generate(res, 200, ['User successfully unlocked.']);
 };
 
-exports.deleteUser = async (req, res) => {
+module.exports.deleteUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);

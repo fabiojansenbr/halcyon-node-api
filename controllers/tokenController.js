@@ -5,7 +5,7 @@ const userToken = require('../utils/userToken');
 const jwt = require('../utils/jwt');
 const handlers = require('../handlers');
 
-exports.getToken = [
+module.exports.getToken = [
     validationMiddleware([validators.grantType]),
     async (req, res) => {
         const handler = handlers[req.body.grantType];

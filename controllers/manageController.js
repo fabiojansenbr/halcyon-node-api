@@ -8,7 +8,7 @@ const email = require('../utils/email');
 const providers = require('../providers');
 const User = require('../models/user');
 
-exports.getProfile = async (req, res) => {
+module.exports.getProfile = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -30,7 +30,7 @@ exports.getProfile = async (req, res) => {
     });
 };
 
-exports.updateProfile = [
+module.exports.updateProfile = [
     validationMiddleware([
         validators.emailAddress,
         validators.firstName,
@@ -68,7 +68,7 @@ exports.updateProfile = [
     }
 ];
 
-exports.verifyEmail = async (req, res) => {
+module.exports.verifyEmail = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -96,7 +96,7 @@ exports.verifyEmail = async (req, res) => {
     ]);
 };
 
-exports.confirmEmail = [
+module.exports.confirmEmail = [
     validators.code,
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -118,7 +118,7 @@ exports.confirmEmail = [
     }
 ];
 
-exports.setPassword = [
+module.exports.setPassword = [
     validationMiddleware([validators.newPassword]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -140,7 +140,7 @@ exports.setPassword = [
     }
 ];
 
-exports.changePassword = [
+module.exports.changePassword = [
     validationMiddleware([validators.currentPassword, validators.newPassword]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -165,7 +165,7 @@ exports.changePassword = [
     }
 ];
 
-exports.addLogin = [
+module.exports.addLogin = [
     validationMiddleware([validators.provider, validators.accessToken]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -211,7 +211,7 @@ exports.addLogin = [
     }
 ];
 
-exports.removeLogin = [
+module.exports.removeLogin = [
     validationMiddleware([validators.provider, validators.externalId]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -232,7 +232,7 @@ exports.removeLogin = [
     }
 ];
 
-exports.authenticatorSettings = async (req, res) => {
+module.exports.authenticatorSettings = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -246,7 +246,7 @@ exports.authenticatorSettings = async (req, res) => {
     return response.generate(res, 200, undefined, result);
 };
 
-exports.configureAuthenticator = [
+module.exports.configureAuthenticator = [
     validationMiddleware([validators.verificationCode]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -284,7 +284,7 @@ exports.configureAuthenticator = [
     }
 ];
 
-exports.disableAuthenticator = async (req, res) => {
+module.exports.disableAuthenticator = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -300,7 +300,7 @@ exports.disableAuthenticator = async (req, res) => {
     ]);
 };
 
-exports.resetRecoveryCodes = async (req, res) => {
+module.exports.resetRecoveryCodes = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -321,7 +321,7 @@ exports.resetRecoveryCodes = async (req, res) => {
     ]);
 };
 
-exports.deleteAccount = async (req, res) => {
+module.exports.deleteAccount = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
