@@ -454,7 +454,7 @@ paths:
                 200:
                     description: Success
                     schema:
-                        $ref: '#/definitions/ResponseModel[TokenModel]'
+                        $ref: '#/definitions/ResponseModel[JwtModel]'
                 400:
                     description: Bad Request
                     schema:
@@ -906,16 +906,16 @@ definitions:
             refreshToken:
                 type: string
 
-    ResponseModel[TokenModel]:
+    ResponseModel[JwtModel]:
         properties:
             data:
-                $ref: '#/definitions/TokenModel'
+                $ref: '#/definitions/JwtModel'
             messages:
                 type: array
                 items:
                     type: string
 
-    TokenModel:
+    JwtModel:
         properties:
             accessToken:
                 type: string
