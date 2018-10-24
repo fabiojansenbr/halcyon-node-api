@@ -1,5 +1,5 @@
 {
-    "name": "halcyon-express-api",
+    "name": "halcyon-node-api",
     "private": true,
     "scripts": {
         "start": "nodemon --inspect app.js",

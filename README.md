@@ -1,10 +1,10 @@
-# Halcyon Express Api
+# Halcyon Node Api
 
-[![Build status](https://ci.appveyor.com/api/projects/status/ycwlg6x0yk3qetfc?svg=true)](https://ci.appveyor.com/project/chrispoulter/halcyon-express-api)
+[![Build status](https://ci.appveyor.com/api/projects/status/9gg6pw0o8yn3hfcy?svg=true)](https://ci.appveyor.com/project/chrispoulter/halcyon-node-api)
 
 A Node.js api project template.
 
-[https://halcyon-express-api.chrispoulter.com](https://halcyon-express-api.chrispoulter.com)
+[https://halcyon-node-api.chrispoulter.com](https://halcyon-node-api.chrispoulter.com)
 
 **Technologies used:**
 

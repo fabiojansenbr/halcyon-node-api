@@ -12,9 +12,9 @@ after_build:
 
 artifacts:
 - path: /
-  name: Halcyon.ExpressApi
+  name: Halcyon.Api
   type: Zip
   
 deploy:
 - provider: Environment
-  name: halcyon-express-api
+  name: halcyon-node-api
