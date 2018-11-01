@@ -1,14 +1,15 @@
-const validationMiddleware = require('../middleware/validationMiddleware');
-const validators = require('../utils/validators');
-const password = require('../utils/password');
-const twoFactor = require('../utils/twoFactor');
-const response = require('../utils/response');
-const userToken = require('../utils/userToken');
-const email = require('../utils/email');
-const providers = require('../providers');
-const User = require('../models/user');
+import { Request, Response } from 'express';
+import validationMiddleware from '../middleware/validationMiddleware';
+import validators from '../utils/validators';
+import * as password from '../utils/password';
+import * as twoFactor from '../utils/twoFactor';
+import * as response from '../utils/response';
+import userToken from '../utils/userToken';
+import email from '../utils/email';
+import providers from '../providers';
+import User from '../models/user';
 
-module.exports.getProfile = async (req, res) => {
+export const getProfile = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -30,14 +31,14 @@ module.exports.getProfile = async (req, res) => {
     });
 };
 
-module.exports.updateProfile = [
+export const updateProfile = [
     validationMiddleware([
         validators.emailAddress,
         validators.firstName,
         validators.lastName,
         validators.dateOfBirth
     ]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -68,7 +69,7 @@ module.exports.updateProfile = [
     }
 ];
 
-module.exports.verifyEmail = async (req, res) => {
+export const verifyEmail = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -96,9 +97,9 @@ module.exports.verifyEmail = async (req, res) => {
     ]);
 };
 
-module.exports.confirmEmail = [
+export const confirmEmail = [
     validationMiddleware([validators.code]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -118,9 +119,9 @@ module.exports.confirmEmail = [
     }
 ];
 
-module.exports.setPassword = [
+export const setPassword = [
     validationMiddleware([validators.newPassword]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -140,9 +141,9 @@ module.exports.setPassword = [
     }
 ];
 
-module.exports.changePassword = [
+export const changePassword = [
     validationMiddleware([validators.currentPassword, validators.newPassword]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -165,9 +166,9 @@ module.exports.changePassword = [
     }
 ];
 
-module.exports.addLogin = [
+export const addLogin = [
     validationMiddleware([validators.provider, validators.accessToken]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -211,9 +212,9 @@ module.exports.addLogin = [
     }
 ];
 
-module.exports.removeLogin = [
+export const removeLogin = [
     validationMiddleware([validators.provider, validators.externalId]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -232,7 +233,7 @@ module.exports.removeLogin = [
     }
 ];
 
-module.exports.getTwoFactorConfig = async (req, res) => {
+export const getTwoFactorConfig = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -246,9 +247,9 @@ module.exports.getTwoFactorConfig = async (req, res) => {
     return response.generate(res, 200, undefined, result);
 };
 
-module.exports.enableTwoFactor = [
+export const enableTwoFactor = [
     validationMiddleware([validators.verificationCode]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -277,7 +278,7 @@ module.exports.enableTwoFactor = [
     }
 ];
 
-module.exports.disableTwoFactor = async (req, res) => {
+export const disableTwoFactor = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -292,7 +293,7 @@ module.exports.disableTwoFactor = async (req, res) => {
     ]);
 };
 
-module.exports.deleteAccount = async (req, res) => {
+export const deleteAccount = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);

@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const userToken = require('./userToken');
-const config = require('./config');
+import jsonWebToken from 'jsonwebtoken';
+import userToken from './userToken';
+import config from './config';
 
-module.exports = async user => {
+const jwt = async user => {
     const expiresIn = config.JWT_EXPIRY_MINUTES * 60;
 
     const payload = {
@@ -14,7 +14,7 @@ module.exports = async user => {
         role: user.roles && user.roles.join()
     };
 
-    const accessToken = jwt.sign(payload, config.JWT_SECURITY_KEY, {
+    const accessToken = jsonWebToken.sign(payload, config.JWT_SECURITY_KEY, {
         expiresIn
     });
 
@@ -42,3 +42,5 @@ const generateRefreshToken = async user => {
 
     return refreshToken.token;
 };
+
+export default jwt;

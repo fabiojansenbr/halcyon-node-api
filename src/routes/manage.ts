@@ -1,6 +1,6 @@
-const express = require('express');
-const manageController = require('../controllers/manageController');
-const authMiddleware = require('../middleware/authMiddleware');
+import express from 'express';
+import * as manageController from '../controllers/manageController';
+import authMiddleware from '../middleware/authMiddleware';
 const router = express.Router();
 
 const authorize = authMiddleware();
@@ -18,4 +18,4 @@ router.post('/TwoFactor', authorize, manageController.enableTwoFactor);
 router.delete('/TwoFactor', authorize, manageController.disableTwoFactor);
 router.delete('/', authorize, manageController.deleteAccount);
 
-module.exports = router;
+export default router;

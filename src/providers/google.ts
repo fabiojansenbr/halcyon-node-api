@@ -1,9 +1,9 @@
-const http = require('../utils/http');
-const config = require('../utils/config');
+import http from '../utils/http';
+import config from '../utils/config';
 
 const baseUrl = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
 
-module.exports.getUser = async accessToken => {
+export const getUser = async (accessToken: string) => {
     const url = `${baseUrl}?access_token=${accessToken}`;
 
     let result;

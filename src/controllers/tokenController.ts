@@ -1,12 +1,13 @@
-const validationMiddleware = require('../middleware/validationMiddleware');
-const validators = require('../utils/validators');
-const response = require('../utils/response');
-const jwt = require('../utils/jwt');
-const handlers = require('../handlers');
+import { Request, Response } from 'express';
+import validationMiddleware from '../middleware/validationMiddleware';
+import validators from '../utils/validators';
+import * as response from '../utils/response';
+import jwt from '../utils/jwt';
+import handlers from '../handlers';
 
-module.exports.getToken = [
+export const getToken = [
     validationMiddleware([validators.grantType]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const handler = handlers[req.body.grantType];
         if (!handler) {
             return response.generate(res, 400, [

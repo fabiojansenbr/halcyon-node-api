@@ -1,6 +1,6 @@
-const speakeasy = require('speakeasy');
+import speakeasy from 'speakeasy';
 
-module.exports.generate = label => {
+export const generate = (label: string) => {
     const secret = speakeasy.generateSecret({ length: 10 });
     const authenticatorUri = speakeasy.otpauthURL({
         secret: secret.base32,
@@ -13,7 +13,7 @@ module.exports.generate = label => {
     };
 };
 
-module.exports.verify = (token, secret) => {
+export const verify = (token: string, secret: string) => {
     if (!token || !secret) {
         return false;
     }

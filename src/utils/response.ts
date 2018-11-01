@@ -1,10 +1,17 @@
-module.exports.generate = (res, status, messages, data) =>
+import { Request, Response } from 'express';
+
+export const generate = (
+    res: Response,
+    status: number,
+    messages: string[],
+    data?: {}
+) =>
     res.status(status).json({
         messages,
         data
     });
 
-module.exports.error = (res, errors) =>
+export const error = (res: Response, errors) =>
     res.status(400).json({
         messages: errors.array({ onlyFirstError: true }).map(err => err.msg)
     });

@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
-module.exports.hash = password => bcrypt.hash(password, 10);
+export const hash = (password: string) => bcrypt.hash(password, 10);
 
-module.exports.verify = (password, hash) => {
+export const verify = (password: string, hash: string) => {
     if (!password || !hash) {
         return false;
     }

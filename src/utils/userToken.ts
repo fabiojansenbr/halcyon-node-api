@@ -1,3 +1,5 @@
-const uuidv4 = require('uuid/v4');
+import uuidv4 from 'uuid/v4';
 
-module.exports = () => uuidv4().replace(/-/giu, '');
+const userToken = () => uuidv4().replace(/-/giu, '');
+
+export default userToken;

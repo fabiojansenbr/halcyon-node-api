@@ -1,8 +1,9 @@
-const password = require('../utils/password');
-const config = require('../utils/config');
-const User = require('../models/user');
+import { Request, Response } from 'express';
+import * as password from '../utils/password';
+import config from '../utils/config';
+import User from '../models/user';
 
-module.exports.seedData = async (req, res) => {
+export const seedData = async (req: Request, res: Response) => {
     var user = {
         emailAddress: config.SEED_EMAIL_ADDRESS,
         password: await password.hash(config.SEED_PASSWORD),

@@ -1,6 +1,6 @@
-const { body } = require('express-validator/check');
+import { body } from 'express-validator/check';
 
-module.exports = {
+const validators = {
     emailAddress: body('emailAddress', 'The Email Address field is invalid.')
         .not()
         .isEmpty()
@@ -93,3 +93,5 @@ module.exports = {
         'TwoFactor'
     ])
 };
+
+export default validators;

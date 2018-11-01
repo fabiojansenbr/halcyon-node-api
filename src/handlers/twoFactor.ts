@@ -1,8 +1,8 @@
-const password = require('../utils/password');
-const twoFactor = require('../utils/twoFactor');
-const User = require('../models/user');
+import * as password from '../utils/password';
+import * as twoFactor from '../utils/twoFactor';
+import User from '../models/user';
 
-module.exports.authenticate = async model => {
+export const authenticate = async model => {
     const user = await User.findOne({
         emailAddress: model.emailAddress
     });

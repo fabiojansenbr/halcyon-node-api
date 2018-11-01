@@ -1,8 +1,13 @@
-const jwt = require('jsonwebtoken');
-const response = require('../utils/response');
-const config = require('../utils/config');
+import { Request, Response, NextFunction } from 'express';
+import jsonWebToken from 'jsonwebtoken';
+import * as response from '../utils/response';
+import config from '../utils/config';
 
-module.exports = requiredRoles => async (req, res, next) => {
+const authMiddleware = (requiredRoles?: string[]) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     const token =
         req.headers.authorization &&
         req.headers.authorization.replace(/bearer /giu, '');
@@ -13,7 +18,7 @@ module.exports = requiredRoles => async (req, res, next) => {
 
     let payload;
     try {
-        payload = await jwt.verify(token, config.JWT_SECURITY_KEY);
+        payload = await jsonWebToken.verify(token, config.JWT_SECURITY_KEY);
     } catch (error) {
         console.error('Verify Token Failed', error);
     }
@@ -36,3 +41,5 @@ module.exports = requiredRoles => async (req, res, next) => {
 
     return next();
 };
+
+export default authMiddleware;

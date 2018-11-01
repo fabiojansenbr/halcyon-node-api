@@ -1,6 +1,6 @@
-const User = require('../models/user');
+import User from '../models/user';
 
-module.exports.authenticate = async model => {
+export const authenticate = async model => {
     const user = await User.findOne({
         'refreshTokens.token': model.refreshToken
     });

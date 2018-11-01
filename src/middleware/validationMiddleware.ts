@@ -1,9 +1,10 @@
-const { validationResult } = require('express-validator/check');
-const response = require('../utils/response');
+import { Request, Response, NextFunction } from 'express';
+import { validationResult } from 'express-validator/check';
+import * as response from '../utils/response';
 
-module.exports = validators => [
+const validationMiddlware = validators => [
     validators,
-    (req, res, next) => {
+    (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return response.error(res, errors);
@@ -12,3 +13,5 @@ module.exports = validators => [
         return next();
     }
 ];
+
+export default validationMiddlware;

@@ -1,11 +1,12 @@
-const validationMiddleware = require('../middleware/validationMiddleware');
-const validators = require('../utils/validators');
-const password = require('../utils/password');
-const { querystring } = require('../utils/request');
-const response = require('../utils/response');
-const User = require('../models/user');
+import { Request, Response } from 'express';
+import validationMiddleware from '../middleware/validationMiddleware';
+import validators from '../utils/validators';
+import * as password from '../utils/password';
+import { querystring } from '../utils/request';
+import * as response from '../utils/response';
+import User from '../models/user';
 
-module.exports.getUsers = async (req, res) => {
+export const getUsers = async (req: Request, res: Response) => {
     const size = querystring.getInt(req, 'size', 10);
     const page = querystring.getInt(req, 'page', 1);
     const search = getSearchExpression(req.query.search);
@@ -44,7 +45,7 @@ module.exports.getUsers = async (req, res) => {
     });
 };
 
-module.exports.createUser = [
+export const createUser = [
     validationMiddleware([
         validators.emailAddress,
         validators.password,
@@ -52,7 +53,7 @@ module.exports.createUser = [
         validators.lastName,
         validators.dateOfBirth
     ]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const existing = await User.findOne({
             emailAddress: req.body.emailAddress
         });
@@ -78,7 +79,7 @@ module.exports.createUser = [
     }
 ];
 
-module.exports.getUser = async (req, res) => {
+export const getUser = async (req: Request, res: Response) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -99,14 +100,14 @@ module.exports.getUser = async (req, res) => {
     });
 };
 
-module.exports.updateUser = [
+export const updateUser = [
     validationMiddleware([
         validators.emailAddress,
         validators.firstName,
         validators.lastName,
         validators.dateOfBirth
     ]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findById(req.params.id);
         if (!user) {
             return response.generate(res, 404, ['User not found.']);
@@ -138,7 +139,7 @@ module.exports.updateUser = [
     }
 ];
 
-module.exports.lockUser = async (req, res) => {
+export const lockUser = async (req: Request, res: Response) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -156,7 +157,7 @@ module.exports.lockUser = async (req, res) => {
     return response.generate(res, 200, ['User successfully locked.']);
 };
 
-module.exports.unlockUser = async (req, res) => {
+export const unlockUser = async (req: Request, res: Response) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -168,7 +169,7 @@ module.exports.unlockUser = async (req, res) => {
     return response.generate(res, 200, ['User successfully unlocked.']);
 };
 
-module.exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req: Request, res: Response) => {
     const user = await User.findById(req.params.id);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);

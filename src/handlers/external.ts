@@ -1,7 +1,7 @@
-const providers = require('../providers');
-const User = require('../models/user');
+import providers from '../providers';
+import User from '../models/user';
 
-module.exports.authenticate = async model => {
+export const authenticate = async model => {
     const provider = providers[model.provider];
     if (!provider) {
         return undefined;

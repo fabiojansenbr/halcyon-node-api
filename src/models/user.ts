@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const crypto = require('crypto');
+import mongoose from 'mongoose';
+import * as crypto from 'crypto';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -49,4 +49,4 @@ UserSchema.pre('save', function(next) {
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
-module.exports = User;
+export default User;

@@ -1,6 +1,6 @@
-const axios = require('axios');
-const axiosRetry = require('axios-retry');
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
 
 axiosRetry(axios, { retries: 3 });
 
-module.exports = axios;
+export default axios;

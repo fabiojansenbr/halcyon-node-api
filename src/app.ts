@@ -1,25 +1,25 @@
-const appInsights = require('applicationinsights');
+import * as appInsights from 'applicationinsights';
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
     appInsights.setup().start();
 }
 
-const express = require('express');
-const cors = require('cors');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const swaggerUi = require('swagger-ui-express');
-const yaml = require('yamljs');
-const config = require('./utils/config');
+import express from 'express';
+import cors from 'cors';
+import logger from 'morgan';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs';
+import config from './utils/config';
 
-const notFoundMiddleware = require('./middleware/notFoundMiddleware');
-const errorMiddleware = require('./middleware/errorMiddleware');
+import notFoundMiddleware from './middleware/notFoundMiddleware';
+import errorMiddleware from './middleware/errorMiddleware';
 
-const seed = require('./routes/seed');
-const account = require('./routes/account');
-const token = require('./routes/token');
-const manage = require('./routes/manage');
-const user = require('./routes/user');
+import seed from './routes/seed';
+import account from './routes/account';
+import token from './routes/token';
+import manage from './routes/manage';
+import user from './routes/user';
 
 mongoose.connect(
     config.MONGODB,
@@ -39,7 +39,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.options('/api', (req, res) => {
+app.options('/api', (req: Request, res: Response) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header(
@@ -58,7 +58,7 @@ app.use('/seed', seed);
 const swaggerDoc = yaml.load('./swagger.yml');
 const options = { customSiteTitle: 'Halcyon Api' };
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc, options));
-app.use('/$', (req, res) => res.redirect('/swagger'));
+app.use('/$', (req: Request, res: Response) => res.redirect('/swagger'));
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

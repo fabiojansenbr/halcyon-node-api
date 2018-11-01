@@ -1,9 +1,15 @@
-const nodemailer = require('nodemailer');
-const format = require('string-format');
-const config = require('./config');
-const templates = require('../resources/templates.json');
+import nodemailer from 'nodemailer';
+import format from 'string-format';
+import config from './config';
+import * as templates from '../resources/templates.json';
 
-module.exports = async message => {
+interface IMessage {
+    to: string;
+    template: string;
+    context: {};
+}
+
+const email = async (message: IMessage) => {
     const template = templates.find(email => email.name === message.template);
     const subject = format(template.subject, message.context);
     const html = format(template.html, message.context);
@@ -29,3 +35,5 @@ module.exports = async message => {
         console.error('Email Send Failed', error);
     }
 };
+
+export default email;

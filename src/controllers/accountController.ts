@@ -1,13 +1,14 @@
-const validationMiddleware = require('../middleware/validationMiddleware');
-const password = require('../utils/password');
-const validators = require('../utils/validators');
-const response = require('../utils/response');
-const userToken = require('../utils/userToken');
-const email = require('../utils/email');
-const providers = require('../providers');
-const User = require('../models/user');
+import { Request, Response } from 'express';
+import validationMiddleware from '../middleware/validationMiddleware';
+import * as password from '../utils/password';
+import validators from '../utils/validators';
+import * as response from '../utils/response';
+import userToken from '../utils/userToken';
+import email from '../utils/email';
+import providers from '../providers';
+import User from '../models/user';
 
-module.exports.register = [
+export const register = [
     validationMiddleware([
         validators.emailAddress,
         validators.password,
@@ -15,7 +16,7 @@ module.exports.register = [
         validators.lastName,
         validators.dateOfBirth
     ]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const existing = await User.findOne({
             emailAddress: req.body.emailAddress
         });
@@ -49,7 +50,7 @@ module.exports.register = [
     }
 ];
 
-module.exports.registerExternal = [
+export const registerExternal = [
     validationMiddleware([
         validators.provider,
         validators.accessToken,
@@ -58,7 +59,7 @@ module.exports.registerExternal = [
         validators.lastName,
         validators.dateOfBirth
     ]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const provider = providers[req.body.provider];
         if (!provider) {
             return response.generate(res, 400, [
@@ -109,9 +110,9 @@ module.exports.registerExternal = [
     }
 ];
 
-module.exports.forgotPassword = [
+export const forgotPassword = [
     validationMiddleware([validators.emailAddress]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findOne({
             emailAddress: req.body.emailAddress
         });
@@ -135,13 +136,13 @@ module.exports.forgotPassword = [
     }
 ];
 
-module.exports.resetPassword = [
+export const resetPassword = [
     validationMiddleware([
         validators.code,
         validators.emailAddress,
         validators.newPassword
     ]),
-    async (req, res) => {
+    async (req: Request, res: Response) => {
         const user = await User.findOne({
             emailAddress: req.body.emailAddress
         });

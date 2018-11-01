@@ -1,7 +1,9 @@
-const facebook = require('./facebook');
-const google = require('./google');
+import * as facebook from './facebook';
+import * as google from './google';
 
-module.exports = {
+const providers = {
     Facebook: facebook,
     Google: google
 };
+
+export default providers;

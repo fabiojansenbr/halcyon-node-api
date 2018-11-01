@@ -1,6 +1,6 @@
-require('dotenv/config');
+import 'dotenv/config';
 
-module.exports = {
+const config = {
     MONGODB: process.env.MONGODB || 'mongodb://localhost:27017/halcyon',
     JWT_SECURITY_KEY: process.env.JWT_SECURITY_KEY || 'Z332RQz9Yjjd1IfRfv4W',
     JWT_EXPIRY_MINUTES: parseInt(process.env.JWT_EXPIRY_MINUTES || '60', 10),
@@ -17,3 +17,5 @@ module.exports = {
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
 };
+
+export default config;
