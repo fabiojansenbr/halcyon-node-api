@@ -4,11 +4,11 @@
     "scripts": {
         "start": "nodemon --inspect app.js",
         "lint": "eslint ./",
-        "format": "prettier --write \"**/*.{js,jsx,json,css}\"",
+        "format": "prettier --write \"**/*.{ts,json}\"",
         "precommit": "lint-staged"
     },
     "lint-staged": {
-        "**/*.{js,jsx,json,css}": [
+        "**/*.{ts,jsx,json}": [
             "prettier --write",
             "git add"
         ]
