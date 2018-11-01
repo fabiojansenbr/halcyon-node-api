@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 module.exports.authenticate = async model => {
     const user = await User.findOne({
-        refreshTokens: model.refreshToken
+        'refreshTokens.token': model.refreshToken
     });
 
     if (!user) {
@@ -16,7 +16,7 @@ module.exports.authenticate = async model => {
     }
 
     user.refreshTokens = user.refreshTokens.filter(
-        token => token !== model.refreshToken
+        rt => rt.token !== model.refreshToken
     );
 
     return {

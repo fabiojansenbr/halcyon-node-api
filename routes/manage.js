@@ -13,22 +13,9 @@ router.put('/ChangePassword', authorize, manageController.changePassword);
 router.put('/SetPassword', authorize, manageController.setPassword);
 router.post('/Login', authorize, manageController.addLogin);
 router.delete('/Login', authorize, manageController.removeLogin);
-router.get('/Authenticator', authorize, manageController.authenticatorSettings);
-router.post(
-    '/Authenticator',
-    authorize,
-    manageController.configureAuthenticator
-);
-router.delete(
-    '/Authenticator',
-    authorize,
-    manageController.disableAuthenticator
-);
-router.put(
-    '/ResetRecoveryCodes',
-    authorize,
-    manageController.resetRecoveryCodes
-);
+router.get('/TwoFactor', authorize, manageController.getTwoFactorConfig);
+router.post('/TwoFactor', authorize, manageController.enableTwoFactor);
+router.delete('/TwoFactor', authorize, manageController.disableTwoFactor);
 router.delete('/', authorize, manageController.deleteAccount);
 
 module.exports = router;

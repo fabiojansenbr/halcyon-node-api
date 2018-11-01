@@ -9,7 +9,6 @@ const UserSchema = new Schema({
     lastName: { type: String, required: true, max: 50 },
     dateOfBirth: { type: Date, required: true },
     search: { type: String, max: 354 },
-    refreshTokens: { type: [{ type: String, max: 32 }] },
     passwordResetToken: { type: String, max: 32 },
     verifyEmailToken: { type: String, max: 32 },
     roles: { type: [String] },
@@ -18,7 +17,12 @@ const UserSchema = new Schema({
     twoFactorEnabled: { type: Boolean },
     twoFactorSecret: { type: String, max: 16 },
     twoFactorTempSecret: { type: String, max: 16 },
-    recoveryCodes: { type: [{ type: String, max: 32 }] },
+    refreshTokens: [
+        {
+            token: { type: String, required: true, max: 32 },
+            issued: { type: Date, required: true }
+        }
+    ],
     logins: [
         {
             provider: { type: String, required: true, max: 50 },

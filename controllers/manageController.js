@@ -232,7 +232,7 @@ module.exports.removeLogin = [
     }
 ];
 
-module.exports.authenticatorSettings = async (req, res) => {
+module.exports.getTwoFactorConfig = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -246,7 +246,7 @@ module.exports.authenticatorSettings = async (req, res) => {
     return response.generate(res, 200, undefined, result);
 };
 
-module.exports.configureAuthenticator = [
+module.exports.enableTwoFactor = [
     validationMiddleware([validators.verificationCode]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
@@ -268,23 +268,16 @@ module.exports.configureAuthenticator = [
         user.twoFactorEnabled = true;
         user.twoFactorSecret = `${user.twoFactorTempSecret}`;
         user.twoFactorTempSecret = undefined;
-        user.recoveryCodes = [];
-
-        for (var i = 0; i < 5; i++) {
-            user.recoveryCodes.push(userToken());
-        }
 
         await user.save();
 
         return response.generate(res, 200, [
-            'Two factor authentication has been enabled. Here are your recovery codes:',
-            user.recoveryCodes.map(code => `<kbd>${code}</kbd>`).join(' '),
-            "Put these codes in a safe place. If you lose your device and don't have the recovery codes you will lose access to your account."
+            'Two factor authentication has been enabled.'
         ]);
     }
 ];
 
-module.exports.disableAuthenticator = async (req, res) => {
+module.exports.disableTwoFactor = async (req, res) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
         return response.generate(res, 404, ['User not found.']);
@@ -292,32 +285,10 @@ module.exports.disableAuthenticator = async (req, res) => {
 
     user.twoFactorEnabled = undefined;
     user.twoFactorSecret = undefined;
-    user.recoveryCodes = undefined;
     await user.save();
 
     return response.generate(res, 200, [
         'Two factor authentication has been disabled.'
-    ]);
-};
-
-module.exports.resetRecoveryCodes = async (req, res) => {
-    const user = await User.findById(res.locals.userId);
-    if (!user) {
-        return response.generate(res, 404, ['User not found.']);
-    }
-
-    user.recoveryCodes = [];
-
-    for (var i = 0; i < 5; i++) {
-        user.recoveryCodes.push(userToken());
-    }
-
-    await user.save();
-
-    return response.generate(res, 200, [
-        'Your recovery codes have been reset.',
-        user.recoveryCodes.map(code => `<kbd>${code}</kbd>`).join(' '),
-        "Put these codes in a safe place. If you lose your device and don't have the recovery codes you will lose access to your account."
     ]);
 };
 

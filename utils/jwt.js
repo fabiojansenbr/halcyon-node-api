@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
+const userToken = require('./userToken');
 const config = require('./config');
 
-module.exports = user => {
+module.exports = async user => {
     const expiresIn = config.JWT_EXPIRY_MINUTES * 60;
 
     const payload = {
@@ -17,11 +18,23 @@ module.exports = user => {
         expiresIn
     });
 
-    const refreshToken = user.refreshTokens[user.refreshTokens.length - 1];
+    const refreshToken = await generateRefreshToken(user);
 
     return {
         accessToken,
         refreshToken,
         expiresIn
     };
+};
+
+const generateRefreshToken = async user => {
+    const refreshToken = {
+        token: userToken(),
+        issued: new Date()
+    };
+
+    user.refreshTokens.push(refreshToken);
+    await user.save();
+
+    return refreshToken.token;
 };

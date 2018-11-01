@@ -16,12 +16,6 @@ module.exports.authenticate = async model => {
         return undefined;
     }
 
-    if (user.isLockedOut) {
-        return {
-            isLockedOut: true
-        };
-    }
-
     const verified = twoFactor.verify(
         model.verificationCode,
         user.twoFactorSecret
@@ -29,6 +23,12 @@ module.exports.authenticate = async model => {
 
     if (!verified) {
         return undefined;
+    }
+
+    if (user.isLockedOut) {
+        return {
+            isLockedOut: true
+        };
     }
 
     return {

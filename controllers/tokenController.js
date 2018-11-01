@@ -1,7 +1,6 @@
 const validationMiddleware = require('../middleware/validationMiddleware');
 const validators = require('../utils/validators');
 const response = require('../utils/response');
-const userToken = require('../utils/userToken');
 const jwt = require('../utils/jwt');
 const handlers = require('../handlers');
 
@@ -33,9 +32,7 @@ module.exports.getToken = [
             ]);
         }
 
-        result.user.refreshTokens.push(userToken());
-        await result.user.save();
-
-        return response.generate(res, 200, undefined, jwt(result.user));
+        const token = await jwt(result.user);
+        return response.generate(res, 200, undefined, token);
     }
 ];

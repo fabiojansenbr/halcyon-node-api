@@ -346,7 +346,7 @@ paths:
                     schema:
                         $ref: '#/definitions/ResponseModel'
 
-    /api/Manage/Authenticator:
+    /api/Manage/TwoFactor:
         get:
             tags:
                 - Manage
@@ -356,7 +356,7 @@ paths:
                 200:
                     description: Success
                     schema:
-                        $ref: '#/definitions/ResponseModel[AuthenticatorSettingsModel]'
+                        $ref: '#/definitions/ResponseModel[TwoFactorModel]'
                 401:
                     description: Unauthorized
                 404:
@@ -376,12 +376,12 @@ paths:
                   in: body
                   required: false
                   schema:
-                      $ref: '#/definitions/ConfigureAuthenticatorModel'
+                      $ref: '#/definitions/EnableTwoFactorModel'
             responses:
                 200:
                     description: Success
                     schema:
-                        $ref: '#/definitions/ResponseModel[String[]]'
+                        $ref: '#/definitions/ResponseModel'
                 400:
                     description: Bad Request
                     schema:
@@ -403,28 +403,6 @@ paths:
                     description: Success
                     schema:
                         $ref: '#/definitions/ResponseModel'
-                400:
-                    description: Bad Request
-                    schema:
-                        $ref: '#/definitions/ResponseModel'
-                401:
-                    description: Unauthorized
-                404:
-                    description: Not Found
-                    schema:
-                        $ref: '#/definitions/ResponseModel'
-
-    /api/Manage/ResetRecoveryCodes:
-        put:
-            tags:
-                - Manage
-            produces:
-                - application/json
-            responses:
-                200:
-                    description: Success
-                    schema:
-                        $ref: '#/definitions/ResponseModel[String[]]'
                 400:
                     description: Bad Request
                     schema:
@@ -844,39 +822,28 @@ definitions:
             externalId:
                 type: string
 
-    ResponseModel[AuthenticatorSettingsModel]:
+    ResponseModel[TwoFactorModel]:
         properties:
             data:
-                $ref: '#/definitions/AuthenticatorSettingsModel'
+                $ref: '#/definitions/TwoFactorModel'
             messages:
                 type: array
                 items:
                     type: string
 
-    AuthenticatorSettingsModel:
+    TwoFactorModel:
         properties:
             authenticatorUri:
                 type: string
             secret:
                 type: string
 
-    ConfigureAuthenticatorModel:
+    EnableTwoFactorModel:
         required:
             - verificationCode
         properties:
             verificationCode:
                 type: string
-
-    ResponseModel[String[]]:
-        properties:
-            data:
-                type: array
-                items:
-                    type: string
-            messages:
-                type: array
-                items:
-                    type: string
 
     GetTokenModel:
         properties:

@@ -152,6 +152,8 @@ module.exports.resetPassword = [
 
         user.password = await password.hash(req.body.newPassword);
         user.passwordResetToken = undefined;
+        user.twoFactorEnabled = undefined;
+        user.twoFactorSecret = undefined;
         await user.save();
 
         return response.generate(res, 200, ['Your password has been reset.']);
