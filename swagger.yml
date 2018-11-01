@@ -853,7 +853,6 @@ definitions:
                     - RefreshToken
                     - External
                     - TwoFactor
-                    - RecoveryCode
                 type: string
             emailAddress:
                 type: string
@@ -867,8 +866,6 @@ definitions:
             accessToken:
                 type: string
             verificationCode:
-                type: string
-            recoveryCode:
                 type: string
             refreshToken:
                 type: string

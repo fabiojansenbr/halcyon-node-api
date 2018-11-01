@@ -82,10 +82,6 @@ module.exports = {
         .isEmpty()
         .trim(),
 
-    recoveryCode: body('recoveryCode', 'The Recovery Code field is invalid.')
-        .not()
-        .isEmpty(),
-
     refreshToken: body('refreshToken', 'The Refresh Token field is invalid.')
         .not()
         .isEmpty(),
@@ -94,7 +90,6 @@ module.exports = {
         'Password',
         'RefreshToken',
         'External',
-        'TwoFactor',
-        'RecoveryCode'
+        'TwoFactor'
     ])
 };
