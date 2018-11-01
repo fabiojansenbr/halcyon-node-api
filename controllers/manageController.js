@@ -97,7 +97,7 @@ module.exports.verifyEmail = async (req, res) => {
 };
 
 module.exports.confirmEmail = [
-    validators.code,
+    validationMiddleware([validators.code]),
     async (req, res) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
