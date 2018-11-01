@@ -28,6 +28,10 @@ module.exports = async user => {
 };
 
 const generateRefreshToken = async user => {
+    user.refreshTokens = user.refreshTokens
+        .sort((a, b) => (a.issued.getTime() > b.issued.getTime() ? -1 : 1))
+        .filter((_, index) => index < 10);
+
     const refreshToken = {
         token: userToken(),
         issued: new Date()
