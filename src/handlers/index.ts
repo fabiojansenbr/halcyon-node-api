@@ -2,8 +2,9 @@ import * as password from './password';
 import * as refreshToken from './refreshToken';
 import * as external from './external';
 import * as twoFactor from './twoFactor';
+import { IUser } from '../models/user';
 
-export interface IUser {
+export interface IHandlerRequest {
     emailAddress?: string;
     password?: string;
     provider?: string;
@@ -20,7 +21,7 @@ interface IHandlerResponse {
 }
 
 interface IHandler {
-    authenticate(model: IUser): Promise<IHandlerResponse>;
+    authenticate(model: IHandlerRequest): Promise<IHandlerResponse>;
 }
 
 interface IHandlerFactory {

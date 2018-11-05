@@ -1,9 +1,9 @@
-import { IUser } from '.';
 import * as password from '../utils/password';
 import * as twoFactor from '../utils/twoFactor';
 import User from '../models/user';
+import { IHandlerRequest } from '.';
 
-export const authenticate = async (model: IUser) => {
+export const authenticate = async (model: IHandlerRequest) => {
     const user = await User.findOne({
         emailAddress: model.emailAddress
     });

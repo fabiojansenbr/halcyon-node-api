@@ -2,6 +2,31 @@ import mongoose from 'mongoose';
 import * as crypto from 'crypto';
 const Schema = mongoose.Schema;
 
+export interface IUserRefreshToken {
+    id?: string;
+    token: string;
+    issued: Date;
+}
+
+export interface IUserLogin {
+    id?: string;
+    provider: string;
+    externalId: string;
+}
+
+export interface IUser {
+    save(): Promise<void>;
+    id?: string;
+    emailAddress: string;
+    password?: string;
+    lastName: string;
+    firstName: string;
+    gravatarUrl: string;
+    roles?: string[];
+    refreshTokens: IUserRefreshToken[];
+    logins: IUserLogin[];
+}
+
 const UserSchema = new Schema({
     emailAddress: { type: String, required: true, max: 254, unique: true },
     password: { type: String, max: 128 },

@@ -1,4 +1,5 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
+import { Result } from 'express-validator/check';
 
 export const generate = (
     res: Response,
@@ -11,7 +12,7 @@ export const generate = (
         data
     });
 
-export const error = (res: Response, errors) =>
+export const error = (res: Response, errors: Result) =>
     res.status(400).json({
         messages: errors.array({ onlyFirstError: true }).map(err => err.msg)
     });

@@ -1,12 +1,12 @@
-import { IUser } from '.';
 import User from '../models/user';
+import { IHandlerRequest } from '.';
 
 interface IRefreshToken {
     token: string;
     issued: Date;
 }
 
-export const authenticate = async (model: IUser) => {
+export const authenticate = async (model: IHandlerRequest) => {
     const user = await User.findOne({
         'refreshTokens.token': model.refreshToken
     });
