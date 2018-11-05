@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator/check';
+import { validationResult, ValidationChain } from 'express-validator/check';
 import * as response from '../utils/response';
 
-const validationMiddlware = validators => [
+const validationMiddlware = (validators: ValidationChain[]) => [
     validators,
     (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);

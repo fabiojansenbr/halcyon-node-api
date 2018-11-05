@@ -4,7 +4,7 @@ import validators from '../utils/validators';
 import * as password from '../utils/password';
 import { querystring } from '../utils/request';
 import * as response from '../utils/response';
-import User from '../models/user';
+import User, { IUser } from '../models/user';
 
 export const getUsers = async (req: Request, res: Response) => {
     const size = querystring.getInt(req, 'size', 10);

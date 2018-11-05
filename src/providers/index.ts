@@ -1,15 +1,15 @@
 import * as facebook from './facebook';
 import * as google from './google';
 
-interface IProviderResponse {
+export interface IProviderResponse {
     userId: string;
 }
 
-interface IProvider {
+export interface IProvider {
     getUser(accessToken: string): Promise<IProviderResponse>;
 }
 
-interface IProviderFactory {
+export interface IProviderFactory {
     [key: string]: IProvider;
 }
 

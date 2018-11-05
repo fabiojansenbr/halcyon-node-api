@@ -1,11 +1,6 @@
 import User from '../models/user';
 import { IHandlerRequest } from '.';
 
-interface IRefreshToken {
-    token: string;
-    issued: Date;
-}
-
 export const authenticate = async (model: IHandlerRequest) => {
     const user = await User.findOne({
         'refreshTokens.token': model.refreshToken
@@ -22,7 +17,7 @@ export const authenticate = async (model: IHandlerRequest) => {
     }
 
     user.refreshTokens = user.refreshTokens.filter(
-        (rt: IRefreshToken) => rt.token !== model.refreshToken
+        rt => rt.token !== model.refreshToken
     );
 
     return {

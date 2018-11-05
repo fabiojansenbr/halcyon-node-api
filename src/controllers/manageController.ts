@@ -7,12 +7,7 @@ import * as response from '../utils/response';
 import userToken from '../utils/userToken';
 import email from '../utils/email';
 import providers from '../providers';
-import User from '../models/user';
-
-interface ILogin {
-    provider: string;
-    externalId: string;
-}
+import User, { IUserLogin } from '../models/user';
 
 export const getProfile = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
@@ -29,7 +24,7 @@ export const getProfile = async (req: Request, res: Response) => {
         emailConfirmed: user.emailConfirmed,
         twoFactorEnabled: user.twoFactorEnabled,
         gravatarUrl: user.gravatarUrl,
-        logins: user.logins.map((login: ILogin) => ({
+        logins: user.logins.map(login => ({
             provider: login.provider,
             externalId: login.externalId
         }))
@@ -226,7 +221,7 @@ export const removeLogin = [
         }
 
         user.logins = user.logins.filter(
-            (login: ILogin) =>
+            login =>
                 login.provider !== req.body.provider &&
                 login.externalId !== req.body.externalId
         );

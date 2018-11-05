@@ -13,18 +13,18 @@ export interface IHandlerRequest {
     verificationCode?: string;
 }
 
-interface IHandlerResponse {
+export interface IHandlerResponse {
     user?: IUser;
     isLockedOut?: boolean;
     requiresTwoFactor?: boolean;
     requiresExternal?: boolean;
 }
 
-interface IHandler {
+export interface IHandler {
     authenticate(model: IHandlerRequest): Promise<IHandlerResponse>;
 }
 
-interface IHandlerFactory {
+export interface IHandlerFactory {
     [key: string]: IHandler;
 }
 

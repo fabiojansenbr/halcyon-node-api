@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as response from '../utils/response';
 
-interface IError {
+export interface IError {
     status?: number;
     message?: string;
 }

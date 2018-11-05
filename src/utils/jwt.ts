@@ -1,7 +1,7 @@
 import jsonWebToken from 'jsonwebtoken';
 import userToken from './userToken';
 import config from './config';
-import { IUser, IUserRefreshToken } from '../models/user';
+import { IUser } from '../models/user';
 
 const jwt = async (user: IUser) => {
     const expiresIn = config.JWT_EXPIRY_MINUTES * 60;
@@ -31,10 +31,9 @@ const jwt = async (user: IUser) => {
 const generateRefreshToken = async (user: IUser) => {
     user.refreshTokens = user.refreshTokens
         .sort(
-            (rt1: IUserRefreshToken, rt2: IUserRefreshToken) =>
-                rt1.issued.getTime() > rt2.issued.getTime() ? -1 : 1
+            (rt1, rt2) => (rt1.issued.getTime() > rt2.issued.getTime() ? -1 : 1)
         )
-        .filter((rt: IUserRefreshToken, index: number) => index < 10);
+        .filter((rt, index) => index < 10);
 
     const refreshToken = {
         token: userToken(),

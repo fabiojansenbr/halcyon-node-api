@@ -4,7 +4,7 @@ import config from '../utils/config';
 import User from '../models/user';
 
 export const seedData = async (req: Request, res: Response) => {
-    var user = {
+    const user = {
         emailAddress: config.SEED_EMAIL_ADDRESS,
         password: await password.hash(config.SEED_PASSWORD),
         firstName: 'System',

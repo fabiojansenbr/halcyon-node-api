@@ -3,7 +3,7 @@ if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
     appInsights.setup().start();
 }
 
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
@@ -66,5 +66,5 @@ app.use(errorMiddleware);
 app.set('port', process.env.PORT || 3001);
 
 const server = app.listen(app.get('port'), () => {
-    console.log(`Express server listening on port ${server.address().port}`);
+    console.log(`Express server listening on port ${server.address()}`);
 });

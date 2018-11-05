@@ -3,7 +3,7 @@ import format from 'string-format';
 import config from './config';
 import * as templates from '../resources/templates.json';
 
-interface IMessage {
+export interface IMessage {
     to: string;
     template: string;
     context: {};

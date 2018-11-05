@@ -1,31 +1,39 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import * as crypto from 'crypto';
 const Schema = mongoose.Schema;
 
-export interface IUserRefreshToken {
+export type IUserRefreshToken = {
     id?: string;
     token: string;
     issued: Date;
-}
+};
 
-export interface IUserLogin {
+export type IUserLogin = {
     id?: string;
     provider: string;
     externalId: string;
-}
+};
 
-export interface IUser {
-    save(): Promise<void>;
+export type IUser = Document & {
     id?: string;
     emailAddress: string;
     password?: string;
-    lastName: string;
     firstName: string;
+    lastName: string;
+    dateOfBirth: Date;
     gravatarUrl: string;
+    search: string;
+    passwordResetToken?: string;
+    verifyEmailToken?: string;
     roles?: string[];
+    emailConfirmed: boolean;
+    isLockedOut: boolean;
+    twoFactorEnabled: boolean;
+    twoFactorSecret?: string;
+    twoFactorTempSecret?: string;
     refreshTokens: IUserRefreshToken[];
     logins: IUserLogin[];
-}
+};
 
 const UserSchema = new Schema({
     emailAddress: { type: String, required: true, max: 254, unique: true },
@@ -65,13 +73,13 @@ UserSchema.virtual('gravatarUrl').get(function() {
     return `https://secure.gravatar.com/avatar/${hash}?d=mm`;
 });
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre<IUser>('save', function(next) {
     this.search = `${this.firstName} ${this.lastName} ${this.emailAddress}`;
     next();
 });
 
 // UserSchema.index({ '$**': 'text' });
 
-const User = mongoose.models.User || mongoose.model('User', UserSchema);
+const User = mongoose.model<IUser>('User', UserSchema);
 
 export default User;
