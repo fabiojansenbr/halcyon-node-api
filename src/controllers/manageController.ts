@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import validationMiddleware from '../middleware/validationMiddleware';
-import validators from '../utils/validators';
+import { validators, validateRequest } from '../utils/validators';
 import * as password from '../utils/password';
 import * as twoFactor from '../utils/twoFactor';
 import * as response from '../utils/response';
@@ -32,12 +31,11 @@ export const getProfile = async (req: Request, res: Response) => {
 };
 
 export const updateProfile = [
-    validationMiddleware([
-        validators.emailAddress,
-        validators.firstName,
-        validators.lastName,
-        validators.dateOfBirth
-    ]),
+    validators.emailAddress,
+    validators.firstName,
+    validators.lastName,
+    validators.dateOfBirth,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
@@ -98,7 +96,8 @@ export const verifyEmail = async (req: Request, res: Response) => {
 };
 
 export const confirmEmail = [
-    validationMiddleware([validators.code]),
+    validators.code,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
@@ -120,7 +119,8 @@ export const confirmEmail = [
 ];
 
 export const setPassword = [
-    validationMiddleware([validators.newPassword]),
+    validators.newPassword,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
@@ -142,7 +142,9 @@ export const setPassword = [
 ];
 
 export const changePassword = [
-    validationMiddleware([validators.currentPassword, validators.newPassword]),
+    validators.currentPassword,
+    validators.newPassword,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
@@ -167,7 +169,9 @@ export const changePassword = [
 ];
 
 export const addLogin = [
-    validationMiddleware([validators.provider, validators.accessToken]),
+    validators.provider,
+    validators.accessToken,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
@@ -213,7 +217,9 @@ export const addLogin = [
 ];
 
 export const removeLogin = [
-    validationMiddleware([validators.provider, validators.externalId]),
+    validators.provider,
+    validators.externalId,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {
@@ -248,7 +254,8 @@ export const getTwoFactorConfig = async (req: Request, res: Response) => {
 };
 
 export const enableTwoFactor = [
-    validationMiddleware([validators.verificationCode]),
+    validators.verificationCode,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(res.locals.userId);
         if (!user) {

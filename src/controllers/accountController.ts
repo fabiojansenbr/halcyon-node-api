@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import validationMiddleware from '../middleware/validationMiddleware';
+import { validators, validateRequest } from '../utils/validators';
 import * as password from '../utils/password';
-import validators from '../utils/validators';
 import * as response from '../utils/response';
 import userToken from '../utils/userToken';
 import email from '../utils/email';
@@ -9,13 +8,12 @@ import providers from '../providers';
 import User from '../models/user';
 
 export const register = [
-    validationMiddleware([
-        validators.emailAddress,
-        validators.password,
-        validators.firstName,
-        validators.lastName,
-        validators.dateOfBirth
-    ]),
+    validators.emailAddress,
+    validators.password,
+    validators.firstName,
+    validators.lastName,
+    validators.dateOfBirth,
+    validateRequest,
     async (req: Request, res: Response) => {
         const existing = await User.findOne({
             emailAddress: req.body.emailAddress
@@ -51,14 +49,13 @@ export const register = [
 ];
 
 export const registerExternal = [
-    validationMiddleware([
-        validators.provider,
-        validators.accessToken,
-        validators.emailAddress,
-        validators.firstName,
-        validators.lastName,
-        validators.dateOfBirth
-    ]),
+    validators.provider,
+    validators.accessToken,
+    validators.emailAddress,
+    validators.firstName,
+    validators.lastName,
+    validators.dateOfBirth,
+    validateRequest,
     async (req: Request, res: Response) => {
         const provider = providers[req.body.provider];
         if (!provider) {
@@ -111,7 +108,8 @@ export const registerExternal = [
 ];
 
 export const forgotPassword = [
-    validationMiddleware([validators.emailAddress]),
+    validators.emailAddress,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findOne({
             emailAddress: req.body.emailAddress
@@ -137,11 +135,10 @@ export const forgotPassword = [
 ];
 
 export const resetPassword = [
-    validationMiddleware([
-        validators.code,
-        validators.emailAddress,
-        validators.newPassword
-    ]),
+    validators.code,
+    validators.emailAddress,
+    validators.newPassword,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findOne({
             emailAddress: req.body.emailAddress

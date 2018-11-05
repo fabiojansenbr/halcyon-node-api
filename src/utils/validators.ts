@@ -1,6 +1,8 @@
-import { body } from 'express-validator/check';
+import { Request, Response, NextFunction } from 'express';
+import { body, validationResult } from 'express-validator/check';
+import * as response from '../utils/response';
 
-const validators = {
+export const validators = {
     emailAddress: body('emailAddress', 'The Email Address field is invalid.')
         .not()
         .isEmpty()
@@ -94,4 +96,15 @@ const validators = {
     ])
 };
 
-export default validators;
+export const validateRequest = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return response.error(res, errors);
+    }
+
+    return next();
+};

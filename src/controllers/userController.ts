@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
-import validationMiddleware from '../middleware/validationMiddleware';
-import validators from '../utils/validators';
+import { validators, validateRequest } from '../utils/validators';
 import * as password from '../utils/password';
 import { querystring } from '../utils/request';
 import * as response from '../utils/response';
-import User, { IUser } from '../models/user';
+import User from '../models/user';
 
 export const getUsers = async (req: Request, res: Response) => {
     const size = querystring.getInt(req, 'size', 10);
@@ -46,13 +45,12 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 export const createUser = [
-    validationMiddleware([
-        validators.emailAddress,
-        validators.password,
-        validators.firstName,
-        validators.lastName,
-        validators.dateOfBirth
-    ]),
+    validators.emailAddress,
+    validators.password,
+    validators.firstName,
+    validators.lastName,
+    validators.dateOfBirth,
+    validateRequest,
     async (req: Request, res: Response) => {
         const existing = await User.findOne({
             emailAddress: req.body.emailAddress
@@ -101,12 +99,11 @@ export const getUser = async (req: Request, res: Response) => {
 };
 
 export const updateUser = [
-    validationMiddleware([
-        validators.emailAddress,
-        validators.firstName,
-        validators.lastName,
-        validators.dateOfBirth
-    ]),
+    validators.emailAddress,
+    validators.firstName,
+    validators.lastName,
+    validators.dateOfBirth,
+    validateRequest,
     async (req: Request, res: Response) => {
         const user = await User.findById(req.params.id);
         if (!user) {
