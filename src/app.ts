@@ -12,8 +12,7 @@ import swaggerUi from 'swagger-ui-express';
 import yaml from 'yamljs';
 import config from './utils/config';
 
-import notFoundMiddleware from './middleware/notFoundMiddleware';
-import errorMiddleware from './middleware/errorMiddleware';
+import * as errorMiddleware from './middleware/errorMiddleware';
 
 import seed from './routes/seed';
 import account from './routes/account';
@@ -60,8 +59,8 @@ const options = { customSiteTitle: 'Halcyon Api' };
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc, options));
 app.use('/$', (req: Request, res: Response) => res.redirect('/swagger'));
 
-app.use(notFoundMiddleware);
-app.use(errorMiddleware);
+app.use(errorMiddleware.notFound);
+app.use(errorMiddleware.error);
 
 app.set('port', process.env.PORT || 3001);
 

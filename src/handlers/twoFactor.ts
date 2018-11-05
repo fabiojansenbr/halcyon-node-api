@@ -1,9 +1,11 @@
 import * as password from '../utils/password';
 import * as twoFactor from '../utils/twoFactor';
 import User from '../models/user';
-import { IHandlerRequest } from '.';
+import { IHandlerRequest, IHandlerResponse } from '.';
 
-export const authenticate = async (model: IHandlerRequest) => {
+export const authenticate = async (
+    model: IHandlerRequest
+): Promise<IHandlerResponse> => {
     const user = await User.findOne({
         emailAddress: model.emailAddress
     });

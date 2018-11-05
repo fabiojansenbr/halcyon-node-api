@@ -1,21 +1,21 @@
 import express from 'express';
 import * as manageController from '../controllers/manageController';
-import authMiddleware from '../middleware/authMiddleware';
+import authorize from '../middleware/authMiddleware';
 const router = express.Router();
 
-const authorize = authMiddleware();
+router.all('*', authorize());
 
-router.get('/', authorize, manageController.getProfile);
-router.put('/', authorize, manageController.updateProfile);
-router.put('/VerifyEmail', authorize, manageController.verifyEmail);
-router.put('/ConfirmEmail', authorize, manageController.confirmEmail);
-router.put('/ChangePassword', authorize, manageController.changePassword);
-router.put('/SetPassword', authorize, manageController.setPassword);
-router.post('/Login', authorize, manageController.addLogin);
-router.delete('/Login', authorize, manageController.removeLogin);
-router.get('/TwoFactor', authorize, manageController.getTwoFactorConfig);
-router.post('/TwoFactor', authorize, manageController.enableTwoFactor);
-router.delete('/TwoFactor', authorize, manageController.disableTwoFactor);
-router.delete('/', authorize, manageController.deleteAccount);
+router.get('/', manageController.getProfile);
+router.put('/', manageController.updateProfile);
+router.put('/VerifyEmail', manageController.verifyEmail);
+router.put('/ConfirmEmail', manageController.confirmEmail);
+router.put('/ChangePassword', manageController.changePassword);
+router.put('/SetPassword', manageController.setPassword);
+router.post('/Login', manageController.addLogin);
+router.delete('/Login', manageController.removeLogin);
+router.get('/TwoFactor', manageController.getTwoFactorConfig);
+router.post('/TwoFactor', manageController.enableTwoFactor);
+router.delete('/TwoFactor', manageController.disableTwoFactor);
+router.delete('/', manageController.deleteAccount);
 
 export default router;

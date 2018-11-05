@@ -8,7 +8,7 @@ interface IPayload {
     role?: string[];
 }
 
-const authMiddleware = (requiredRoles?: string[]) => async (
+const authorize = (requiredRoles?: string[]) => async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -50,4 +50,4 @@ const authMiddleware = (requiredRoles?: string[]) => async (
     return next();
 };
 
-export default authMiddleware;
+export default authorize;

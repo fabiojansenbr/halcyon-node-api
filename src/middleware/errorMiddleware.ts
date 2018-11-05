@@ -6,7 +6,8 @@ export interface IError {
     message?: string;
 }
 
-const errorMiddleware = (err: IError, req: Request, res: Response) =>
+export const error = (err: IError, req: Request, res: Response) =>
     response.generate(res, err.status || 500, [err.message]);
 
-export default errorMiddleware;
+export const notFound = (req: Request, res: Response) =>
+    response.generate(res, 404, ['Resource not found.']);

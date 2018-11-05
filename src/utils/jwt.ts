@@ -3,7 +3,13 @@ import uuidv4 from 'uuid/v4';
 import config from './config';
 import { IUser } from '../models/user';
 
-const jwt = async (user: IUser) => {
+export interface IJwtResponse {
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
+}
+
+const jwt = async (user: IUser): Promise<IJwtResponse> => {
     const expiresIn = config.JWT_EXPIRY_MINUTES * 60;
 
     const payload = {

@@ -1,6 +1,11 @@
 import speakeasy from 'speakeasy';
 
-export const generate = (label: string) => {
+export interface ITwoFactorResponse {
+    secret: string;
+    authenticatorUri: string;
+}
+
+export const generate = (label: string): ITwoFactorResponse => {
     const secret = speakeasy.generateSecret({ length: 10 });
     const authenticatorUri = speakeasy.otpauthURL({
         secret: secret.base32,
