@@ -221,7 +221,7 @@ module.exports.removeLogin = [
 
         user.logins = user.logins.filter(
             login =>
-                login.provder !== req.body.provider &&
+                login.provider !== req.body.provider &&
                 login.externalId !== req.body.externalId
         );
         await user.save();
