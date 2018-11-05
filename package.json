@@ -2,8 +2,9 @@
     "name": "halcyon-node-api",
     "private": true,
     "scripts": {
-        "start": "nodemon --inspect app.js",
+        "start": "nodemon --inspect dist/app.js",
         "build": "tsc",
+        "watch": "tsc -w",
         "lint": "tslint -c tslint.json -p tsconfig.json",
         "format": "prettier --write \"src/**/*.{ts,json}\"",
         "precommit": "lint-staged"
