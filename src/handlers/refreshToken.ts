@@ -1,6 +1,12 @@
+import { IUser } from '.';
 import User from '../models/user';
 
-export const authenticate = async model => {
+interface IRefreshToken {
+    token: string;
+    issued: Date;
+}
+
+export const authenticate = async (model: IUser) => {
     const user = await User.findOne({
         'refreshTokens.token': model.refreshToken
     });
@@ -16,7 +22,7 @@ export const authenticate = async model => {
     }
 
     user.refreshTokens = user.refreshTokens.filter(
-        rt => rt.token !== model.refreshToken
+        (rt: IRefreshToken) => rt.token !== model.refreshToken
     );
 
     return {

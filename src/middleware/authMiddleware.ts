@@ -3,6 +3,11 @@ import jsonWebToken from 'jsonwebtoken';
 import * as response from '../utils/response';
 import config from '../utils/config';
 
+interface IPayload {
+    sub: string;
+    role?: string[];
+}
+
 const authMiddleware = (requiredRoles?: string[]) => async (
     req: Request,
     res: Response,
@@ -16,9 +21,12 @@ const authMiddleware = (requiredRoles?: string[]) => async (
         return response.generate(res, 401, ['The token provided was invalid.']);
     }
 
-    let payload;
+    let payload: IPayload;
     try {
-        payload = await jsonWebToken.verify(token, config.JWT_SECURITY_KEY);
+        payload = (await jsonWebToken.verify(
+            token,
+            config.JWT_SECURITY_KEY
+        )) as IPayload;
     } catch (error) {
         console.error('Verify Token Failed', error);
     }

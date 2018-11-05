@@ -9,6 +9,11 @@ import email from '../utils/email';
 import providers from '../providers';
 import User from '../models/user';
 
+interface ILogin {
+    provider: string;
+    externalId: string;
+}
+
 export const getProfile = async (req: Request, res: Response) => {
     const user = await User.findById(res.locals.userId);
     if (!user) {
@@ -24,7 +29,7 @@ export const getProfile = async (req: Request, res: Response) => {
         emailConfirmed: user.emailConfirmed,
         twoFactorEnabled: user.twoFactorEnabled,
         gravatarUrl: user.gravatarUrl,
-        logins: user.logins.map(login => ({
+        logins: user.logins.map((login: ILogin) => ({
             provider: login.provider,
             externalId: login.externalId
         }))
@@ -221,8 +226,8 @@ export const removeLogin = [
         }
 
         user.logins = user.logins.filter(
-            login =>
-                login.provder !== req.body.provider &&
+            (login: ILogin) =>
+                login.provider !== req.body.provider &&
                 login.externalId !== req.body.externalId
         );
         await user.save();

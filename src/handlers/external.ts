@@ -1,7 +1,8 @@
 import providers from '../providers';
+import { IUser } from '.';
 import User from '../models/user';
 
-export const authenticate = async model => {
+export const authenticate = async (model: IUser) => {
     const provider = providers[model.provider];
     if (!provider) {
         return undefined;

@@ -1,7 +1,8 @@
 import * as password from '../utils/password';
+import { IUser } from '.';
 import User from '../models/user';
 
-export const authenticate = async model => {
+export const authenticate = async (model: IUser) => {
     const user = await User.findOne({
         emailAddress: model.emailAddress
     });

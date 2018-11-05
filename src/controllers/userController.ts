@@ -186,7 +186,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     return response.generate(res, 200, ['User successfully deleted.']);
 };
 
-const getSearchExpression = search => {
+const getSearchExpression = (search: string) => {
     if (!search) {
         return undefined;
     }
@@ -195,7 +195,7 @@ const getSearchExpression = search => {
     return { search: { $regex: search, $options: 'i' } };
 };
 
-const getSortExpression = sort => {
+const getSortExpression = (sort: string) => {
     const sortExpression = [];
 
     switch (sort) {

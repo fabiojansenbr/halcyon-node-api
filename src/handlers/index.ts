@@ -3,7 +3,31 @@ import * as refreshToken from './refreshToken';
 import * as external from './external';
 import * as twoFactor from './twoFactor';
 
-const handlers = {
+export interface IUser {
+    emailAddress?: string;
+    password?: string;
+    provider?: string;
+    accessToken?: string;
+    refreshToken?: string;
+    verificationCode?: string;
+}
+
+interface IHandlerResponse {
+    user?: IUser;
+    isLockedOut?: boolean;
+    requiresTwoFactor?: boolean;
+    requiresExternal?: boolean;
+}
+
+interface IHandler {
+    authenticate(model: IUser): Promise<IHandlerResponse>;
+}
+
+interface IHandlerFactory {
+    [key: string]: IHandler;
+}
+
+const handlers: IHandlerFactory = {
     Password: password,
     RefreshToken: refreshToken,
     External: external,
