@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { validators, validateRequest } from '../utils/validators';
+import uuidv4 from 'uuid/v4';
 import * as password from '../utils/password';
 import * as twoFactor from '../utils/twoFactor';
 import * as response from '../utils/response';
-import userToken from '../utils/userToken';
 import email from '../utils/email';
 import providers from '../providers';
 import User, { IUserLogin } from '../models/user';
@@ -79,7 +79,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         ]);
     }
 
-    user.verifyEmailToken = userToken();
+    user.verifyEmailToken = uuidv4();
     await user.save();
 
     await email({

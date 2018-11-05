@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validators, validateRequest } from '../utils/validators';
 import * as password from '../utils/password';
-import { querystring } from '../utils/request';
+import * as querystring from '../utils/querystring';
 import * as response from '../utils/response';
 import User from '../models/user';
 

@@ -1,5 +1,5 @@
 import jsonWebToken from 'jsonwebtoken';
-import userToken from './userToken';
+import uuidv4 from 'uuid/v4';
 import config from './config';
 import { IUser } from '../models/user';
 
@@ -36,7 +36,7 @@ const generateRefreshToken = async (user: IUser) => {
         .filter((rt, index) => index < 10);
 
     const refreshToken = {
-        token: userToken(),
+        token: uuidv4(),
         issued: new Date()
     };
 

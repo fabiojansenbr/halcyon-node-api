@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
+import uuidv4 from 'uuid/v4';
 import { validators, validateRequest } from '../utils/validators';
 import * as password from '../utils/password';
 import * as response from '../utils/response';
-import userToken from '../utils/userToken';
 import email from '../utils/email';
 import providers from '../providers';
 import User from '../models/user';
@@ -31,7 +31,7 @@ export const register = [
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             dateOfBirth: req.body.dateOfBirth,
-            verifyEmailToken: userToken()
+            verifyEmailToken: uuidv4()
         });
 
         await user.save();
@@ -116,7 +116,7 @@ export const forgotPassword = [
         });
 
         if (user) {
-            user.passwordResetToken = userToken();
+            user.passwordResetToken = uuidv4();
             await user.save();
 
             await email({
