@@ -1,18 +1,18 @@
-import mongoose, { Document } from 'mongoose';
 import * as crypto from 'crypto';
+import mongoose, { Document } from 'mongoose';
 const Schema = mongoose.Schema;
 
-export type IUserRefreshToken = {
+export interface IUserRefreshToken {
     id?: string;
     token: string;
     issued: Date;
-};
+}
 
-export type IUserLogin = {
+export interface IUserLogin {
     id?: string;
     provider: string;
     externalId: string;
-};
+}
 
 export type IUser = Document & {
     id?: string;

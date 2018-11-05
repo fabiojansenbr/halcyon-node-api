@@ -1,2 +1,14 @@
 {
+    "extends": ["tslint:recommended"],
+    "rules": {
+        "quotemark": [true, "single"],
+        "no-console": false,
+        "trailing-comma": false,
+        "object-literal-sort-keys": false,
+        "arrow-parens": false,
+        "ordered-imports": false
+    },
+    "linterOptions": {
+        "exclude": ["**/*.json"]
+    }
 }

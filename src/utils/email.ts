@@ -10,7 +10,7 @@ export interface IMessage {
 }
 
 const email = async (message: IMessage) => {
-    const template = templates.find(email => email.name === message.template);
+    const template = templates.find(t => t.name === message.template);
     const subject = format(template.subject, message.context);
     const html = format(template.html, message.context);
 
