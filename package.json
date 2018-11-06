@@ -2,9 +2,10 @@
     "name": "halcyon-node-api",
     "private": true,
     "scripts": {
-        "start": "nodemon --inspect dist/app.js",
+        "start": "concurrently -k -n \"Typescript,Node\" -c \"yellow.bold,cyan.bold\" \"yarn watch-ts\" \"yarn watch-node\"",
         "build": "tsc",
-        "watch": "tsc -w",
+        "watch-ts": "tsc -w",
+        "watch-node": "nodemon --inspect dist/app.js",
         "lint": "tslint -c tslint.json -p tsconfig.json",
         "format": "prettier --write \"src/**/*.{ts,json}\"",
         "precommit": "lint-staged"
@@ -49,6 +50,7 @@
         "@types/swagger-ui-express": "3.0.0",
         "@types/uuid": "3.4.4",
         "@types/yamljs": "0.2.30",
+        "concurrently": "^4.0.1",
         "husky": "0.14.3",
         "lint-staged": "7.2.2",
         "nodemon": "1.18.4",
