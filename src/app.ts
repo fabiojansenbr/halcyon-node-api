@@ -57,13 +57,11 @@ app.use('/seed', seed);
 const swaggerDoc = yaml.load('./swagger.yml');
 const options = { customSiteTitle: 'Halcyon Api' };
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc, options));
-app.use('/$', (req: Request, res: Response) => res.redirect('/swagger'));
+app.use('/$', (req: Request, res: Response) => res.redirect(301, '/swagger/'));
 
 app.use(errorMiddleware.notFound);
 app.use(errorMiddleware.error);
 
 app.set('port', process.env.PORT || 3001);
 
-app.listen(app.get('port'), () => {
-    console.log(`Express server listening on port ${app.get('port')}`);
-});
+export default app;

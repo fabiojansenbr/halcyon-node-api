@@ -5,11 +5,12 @@ stack: node 8
 build_script:
 - yarn
 - yarn lint
+- yarn test
 - yarn build
 
 after_build:
 - yarn --production
-- rm -rf .git .vscode .gitignore README.md tsconfig.json tslint.json
+- rm -rf .git .vscode coverage .gitignore README.md tsconfig.json tslint.json
 
 artifacts:
 - path: /
