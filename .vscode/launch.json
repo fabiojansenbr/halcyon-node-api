@@ -5,7 +5,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch",
-            "program": "${workspaceFolder}\\dist\\app.js"
+            "program": "${workspaceFolder}\\dist\\server.js"
         },
         {
             "type": "node",
