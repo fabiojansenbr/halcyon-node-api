@@ -5,7 +5,6 @@ stack: node 8
 build_script:
 - yarn
 - yarn lint
-- yarn test
 - yarn build
 
 after_build:
