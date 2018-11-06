@@ -10,6 +10,8 @@ A Node.js api project template.
 
 - Node.js
 [https://nodejs.org](https://nodejs.org)
+- TypeScript
+[https://www.typescriptlang.org](https://www.typescriptlang.org)
 - Express
 [https://expressjs.com](https://expressjs.com)
 - MongoDB

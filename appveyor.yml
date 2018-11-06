@@ -5,10 +5,11 @@ stack: node 8
 build_script:
 - yarn
 - yarn lint
+- yarn build
 
 after_build:
 - yarn --production
-- rm -rf .git .vscode .eslintignore .eslintrc .gitignore .prettierrc appveyor.yml README.md
+- rm -rf .git .vscode coverage .gitignore README.md tsconfig.json tslint.json
 
 artifacts:
 - path: /
