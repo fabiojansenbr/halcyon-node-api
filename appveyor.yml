@@ -9,7 +9,7 @@ build_script:
 
 after_build:
 - yarn --production
-- rm -rf .git .vscode coverage .gitignore README.md tsconfig.json tslint.json
+- rm -rf .git .vscode .gitignore README.md tsconfig.json tslint.json
 
 artifacts:
 - path: /
