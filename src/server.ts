@@ -1,7 +1,9 @@
 import app from './app';
 
-const server = app.listen(app.get('port'), () => {
-    console.log(`Express server listening on port ${app.get('port')}`);
+const port = app.get('port');
+
+const server = app.listen(port, () => {
+    console.log(`Express server listening on port ${port}`);
 });
 
 export default server;
