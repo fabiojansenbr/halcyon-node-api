@@ -3,12 +3,12 @@ image: ubuntu
 stack: node 8
 
 build_script:
-- yarn
-- yarn lint
-- yarn build
+- npm install
+- npm run lint
+- npm run build
 
 after_build:
-- yarn --production
+- npm prune --production
 - rm -rf .git .vscode .gitignore README.md tsconfig.json tslint.json
 
 artifacts:
