@@ -8,23 +8,24 @@ A Node.js api project template.
 
 **Technologies used:**
 
-- Node.js
-[https://nodejs.org](https://nodejs.org)
-- TypeScript
-[https://www.typescriptlang.org](https://www.typescriptlang.org)
-- Express
-[https://expressjs.com](https://expressjs.com)
-- MongoDB
-[https://www.mongodb.com](https://www.mongodb.com)
+-   Node.js
+    [https://nodejs.org](https://nodejs.org)
+-   TypeScript
+    [https://www.typescriptlang.org](https://www.typescriptlang.org)
+-   Express
+    [https://expressjs.com](https://expressjs.com)
+-   MongoDB
+    [https://www.mongodb.com](https://www.mongodb.com)
 
 #### Custom Settings
+
     JWT_SECURITY_KEY=Z332RQz9Yjjd1IfRfv4W
     JWT_EXPIRY_MINUTES=60
 
     MONGODB=<MongoDB URI> // default: mongodb://localhost:27017/halcyon
 
     SEED_EMAIL_ADDRESS=<System Administrator Email Address> // default: admin@chrispoulter.com
-    SEED_PASSWORD=<System Administrator Password> // default: Testing123 
+    SEED_PASSWORD=<System Administrator Password> // default: Testing123
 
     EMAIL_HOST=<Smtp Host> // default: localhost
     EMAIL_PORT=<Smtp Port> // default: 25
@@ -37,4 +38,3 @@ A Node.js api project template.
     FACEBOOK_APP_SECRET=<Facebook App Secret>
 
     GOOGLE_CLIENT_ID=<Google App Client Id>
-    

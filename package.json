@@ -7,7 +7,7 @@
         "watch-ts": "tsc -w",
         "watch-node": "nodemon --inspect dist/server.js",
         "lint": "tslint -c tslint.json -p tsconfig.json",
-        "format": "prettier --write \"src/**/*.{ts,json}\"",
+        "format": "prettier --write \"**/*.{ts,tsx,json,scss,md}\"",
         "precommit": "lint-staged"
     },
     "dependencies": {
@@ -51,6 +51,7 @@
         "nodemon": "1.18.4",
         "prettier": "1.14.3",
         "tslint": "5.11.0",
+        "tslint-config-prettier": "1.15.0",
         "typescript": "3.1.5"
     },
     "husky": {
@@ -59,7 +60,7 @@
         }
     },
     "lint-staged": {
-        "src/**/*.{ts,json}": [
+        "**/*.{ts,tsx,json,scss,md}": [
             "prettier --write",
             "git add"
         ]
