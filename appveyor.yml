@@ -3,19 +3,19 @@ image: ubuntu
 stack: node 8
 
 build_script:
-- npm install
-- npm run lint
-- npm run build
+    - npm install
+    - npm run lint
+    - npm run build
 
 after_build:
-- npm prune --production
-- rm -rf .git .vscode .gitignore README.md tsconfig.json tslint.json
+    - npm prune --production
+    - rm -rf .git .vscode .gitignore .prettierignore .prettierrc README.md tsconfig.json tslint.json
 
 artifacts:
-- path: /
-  name: Halcyon.Api
-  type: Zip
-  
+    - path: /
+      name: Halcyon.Api
+      type: Zip
+
 deploy:
-- provider: Environment
-  name: halcyon-node-api
+    - provider: Environment
+      name: halcyon-node-api
