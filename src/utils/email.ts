@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import format from 'string-format';
 import config from './config';
-import * as templates from '../resources/templates.json';
+import templates from '../resources/templates.json';
 
 export interface IMessage {
     to: string;

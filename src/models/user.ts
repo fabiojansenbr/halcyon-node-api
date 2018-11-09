@@ -42,8 +42,8 @@ const UserSchema = new Schema({
     lastName: { type: String, required: true, max: 50 },
     dateOfBirth: { type: Date, required: true },
     search: { type: String, max: 354 },
-    passwordResetToken: { type: String, max: 32 },
-    verifyEmailToken: { type: String, max: 32 },
+    passwordResetToken: { type: String, max: 36 },
+    verifyEmailToken: { type: String, max: 36 },
     roles: { type: [String] },
     emailConfirmed: { type: Boolean },
     isLockedOut: { type: Boolean },
@@ -52,7 +52,7 @@ const UserSchema = new Schema({
     twoFactorTempSecret: { type: String, max: 16 },
     refreshTokens: [
         {
-            token: { type: String, required: true, max: 32 },
+            token: { type: String, required: true, max: 36 },
             issued: { type: Date, required: true }
         }
     ],
