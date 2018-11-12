@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import format from 'string-format';
 import config from './config';
+import * as string from './string';
 import templates from '../resources/templates.json';
 
 export interface IMessage {
@@ -11,8 +11,8 @@ export interface IMessage {
 
 const email = async (message: IMessage) => {
     const template = templates.find(t => t.name === message.template);
-    const subject = format(template.subject, message.context);
-    const html = format(template.html, message.context);
+    const subject = string.format(template.subject, message.context);
+    const html = string.format(template.html, message.context);
 
     const transport = nodemailer.createTransport({
         host: config.EMAIL_HOST,
