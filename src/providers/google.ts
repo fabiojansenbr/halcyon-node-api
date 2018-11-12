@@ -1,4 +1,4 @@
-import http from '../utils/http';
+import * as http from '../utils/http';
 import config from '../utils/config';
 import { IProviderResponse } from '.';
 
@@ -21,9 +21,8 @@ export const getUser = async (
         console.error('Google Get User Failed', error);
     }
 
-    const data = result && result.data;
-    const userId = data && data.sub;
-    const aud = data && data.aud;
+    const userId = result && result.sub;
+    const aud = result && result.aud;
 
     if (!userId || aud !== config.GOOGLE_CLIENT_ID) {
         return undefined;

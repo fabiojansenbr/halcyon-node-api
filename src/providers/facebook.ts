@@ -1,4 +1,4 @@
-import http from '../utils/http';
+import * as http from '../utils/http';
 import config from '../utils/config';
 import { IProviderResponse } from '.';
 
@@ -24,16 +24,11 @@ export const getUser = async (
         console.error('Facebook Get User Failed', error);
     }
 
-    if (
-        !result ||
-        !result.data ||
-        !result.data.data ||
-        !result.data.data.user_id
-    ) {
+    if (!result || !result.data || !result.data.user_id) {
         return undefined;
     }
 
     return {
-        userId: result.data.data.user_id
+        userId: result.data.user_id
     };
 };
